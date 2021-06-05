@@ -1,5 +1,7 @@
 @extends('admin.layouts.home')
 
+@section('title','Admin Login')
+
 @section('contents')
 	<!-- main-signin-wrapper -->
 	<div class="my-auto page page-h">

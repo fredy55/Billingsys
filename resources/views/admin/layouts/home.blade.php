@@ -10,7 +10,7 @@
 		<meta name="Keywords" content="cryptocurrency, dashboard, admin, crypto, ico, bootstrap admin template, admin template, bootstrap dashboard template, crypto dashboard, cryptocurrency dashboard, ico dashboard, crypto admin, dashboard cryptocurrency, cryptocurrency trading dashboard, crypto dashboard template "/>
 
 		<!-- Title -->
-        <title> {{ env('APP_NAME') }} </title>
+        <title> {{ env('APP_NAME') }} | @yield('title') </title>
 
         <!-- Favicon -->
         <link rel="icon" href="{{ asset('img/brand/favicon.png') }}" type="image/x-icon"/>
