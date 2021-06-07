@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServiceCategoryTable extends Migration
+class CreateServicatTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateServiceCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_category', function (Blueprint $table) {
+        Schema::create('servicat', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('category_id')->unique();
             $table->string('category')->unique();
@@ -30,6 +30,6 @@ class CreateServiceCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_category');
+        Schema::dropIfExists('servicat');
     }
 }

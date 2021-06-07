@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class ClientsController extends Controller
 {
-    //
-}
+    //Admin authentication
+    public function __construct(){
+        $this->middleware('auth:admin');
+    }
+    

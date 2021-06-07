@@ -10,7 +10,7 @@ class Admin extends Authenticatable
     use Notifiable;
     
     //Name of table
-    protected $table = 'adminssite_admin';
+    protected $table = 'site_admin';
     
     //Table primary key
     protected $primaryKey = 'id';

@@ -16,7 +16,7 @@ class CreateServiceTable extends Migration
         Schema::create('service', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('service_id')->unique();
-            $table->bigInteger('category_id')->unique();
+            $table->bigInteger('category_id');
             $table->string('sname');
             $table->mediumText('description');
             $table->decimal('price', 8, 2);

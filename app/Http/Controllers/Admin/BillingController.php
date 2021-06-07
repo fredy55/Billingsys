@@ -7,5 +7,9 @@ use Illuminate\Http\Request;
 
 class BillingController extends Controller
 {
-    //
+    //Admin authentication
+    public function __construct(){
+        $this->middleware('auth:admin');
+    }
+    
 }
