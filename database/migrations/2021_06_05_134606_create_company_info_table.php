@@ -24,7 +24,7 @@ class CreateCompanyInfoTable extends Migration
             $table->string('state');
             $table->string('country')->default('Nigeria');
             $table->string('img_url')->default('nil');
-            $table->integer('IsActive');
+            $table->integer('IsActive')->default(1);
             $table->timestamps();
         });
     }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Compinfo;
 
 class CompinfoController extends Controller
 {
@@ -12,14 +14,29 @@ class CompinfoController extends Controller
         $this->middleware('auth:admin');
     }
     
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $compinfo=Compinfo::all();
+        
+        return view('admin.company.list', ['compinfo'=>$compinfo]); 
+    }
+
+        /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $compinfo=Compinfo::find($id);
+
+        return view('admin.company.details', ['compinfo'=>$compinfo]);
     }
 
     /**
@@ -28,8 +45,8 @@ class CompinfoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    { 
+       return view('admin.company.create');
     }
 
     /**
@@ -40,18 +57,41 @@ class CompinfoController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        //validate form data
+        $this->validate($request,[
+            'ctname'=>'string|required',
+            'cacnum'=>'string|required',
+            'email'=>'string|required',
+            'phone'=>'numeric|required',
+            'address1'=>'string|required',
+            'city'=>'string|required',
+            'state'=>'string|required',
+            'country'=>'string|required'
+        ]);
+        
+        //product does not exist
+        $exist=Compinfo::where('email', $request->post('email'))->doesntExist();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        if($exist){
+            $company = new Compinfo;
+            $company->ctname = $request->post('ctname');
+            $company->cac_num = $request->post('cacnum');
+            $company->email = $request->post('email');
+            $company->phone_no = $request->post('phone');
+            $company->addressln1 = $request->post('address1');
+            $company->city = $request->post('city');
+            $company->state = $request->post('state');
+            $company->country = $request->post('country');
+
+            if($company->save()){
+                return redirect()->route('company.list')->with(['success'=>'Company added successfully!']);
+            }else{
+                return redirect()->route('company.add')->with(['danger'=>'Company NOT added!']);  
+            }
+        }else{
+            return redirect()->route('company.add')->with(['warning'=>'Company already exist!']);  
+        }
+
     }
 
     /**
@@ -62,7 +102,9 @@ class CompinfoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $compinfo=Compinfo::find($id);
+
+        return view('admin.company.edit', ['compinfo'=>$compinfo]);
     }
 
     /**
@@ -72,9 +114,44 @@ class CompinfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+       //validate form data
+       //validate form data
+       $this->validate($request,[
+            'ctname'=>'string|required',
+            'cacnum'=>'string|required',
+            'email'=>'string|required',
+            'phone'=>'numeric|required',
+            'address1'=>'string|required',
+            'city'=>'string|required',
+            'state'=>'string|required',
+            'country'=>'string|required'
+        ]);
+        
+        //Company exist
+        $exist=Compinfo::where('id',$request->post('id'))->exists();
+
+        if($exist){
+            $company = Compinfo::find($request->post('id'));
+            $company->ctname = $request->post('ctname');
+            $company->cac_num = $request->post('cacnum');
+            $company->email = $request->post('email');
+            $company->phone_no = $request->post('phone');
+            $company->addressln1 = $request->post('address1');
+            $company->city = $request->post('city');
+            $company->state = $request->post('state');
+            $company->country = $request->post('country');
+
+            if($company->save()){
+                return redirect()->route('company.list')->with(['success'=>'Company updated successfully!']);
+            }else{
+                return redirect()->route('company.add')->with(['danger'=>'Company NOT updated!']);  
+            }
+        }else{
+            return redirect()->route('company.add')->with(['warning'=>'Company already exist!']);  
+        }
+
     }
 
     /**
@@ -85,6 +162,19 @@ class CompinfoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        ///product does exist
+        $exist=Compinfo::where('id',$id)->exists();
+
+        if($exist){
+            $company = Compinfo::find($id);
+
+            if($company->delete()){
+                return redirect()->route('company.list')->with(['success'=>'Company deleted successfully!']);
+            }else{
+                return redirect()->route('company.list')->with(['danger'=>'Company NOT deleted!']);  
+            }
+        }else{
+            return redirect()->route('company.list')->with(['warning'=>'Company does Not exist!']);  
+        }
     }
 }

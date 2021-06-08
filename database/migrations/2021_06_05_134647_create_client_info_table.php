@@ -22,7 +22,7 @@ class CreateClientInfoTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('country')->default('Nigeria');
-            $table->integer('IsActive');
+            $table->integer('IsActive')->default(1);
             $table->timestamps();
         });
     }
