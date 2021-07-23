@@ -67,6 +67,12 @@
                             <span class="badge badge-warning side-badge">0</span>
                         </a>
                     </li>
+                    <li>
+                        {{-- <a class="slide-item" href="{{ route('clients.subscriptions') }}">
+                            Subscriptions
+                            <span class="badge badge-warning side-badge">0</span>
+                        </a> --}}
+                    </li>
                 </ul>
             </li>
 
@@ -79,7 +85,7 @@
                 </a>
                 <ul class="slide-menu">
                     <li>
-                        <a class="slide-item" href="{{ route('admin.dashboard') }}">
+                        <a class="slide-item" href="{{ route('bills.list') }}">
                             Billing List
                             <span class="badge badge-warning side-badge">0</span>
                         </a>

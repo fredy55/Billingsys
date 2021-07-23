@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Clients;
+use App\Models\Compinfo;
 
 class ClientsController extends Controller
 {
@@ -46,7 +47,9 @@ class ClientsController extends Controller
      */
     public function create()
     { 
-       return view('admin.clients.create');
+        $companyInfo = Compinfo::where('IsActive', 1)->get(['id','ctname']);
+        
+        return view('admin.clients.create', ['compInfo'=>$companyInfo]);
     }
 
     /**
@@ -60,6 +63,7 @@ class ClientsController extends Controller
         //validate form data
         $this->validate($request,[
             'ctname'=>'string|required',
+            'compinfo'=>'numeric|required',
             'email'=>'string|required',
             'phone'=>'numeric|required',
             'address1'=>'string|required',
@@ -73,6 +77,7 @@ class ClientsController extends Controller
 
         if($exist){
             $clients = new Clients;
+            $clients->compId = $request->post('compinfo');
             $clients->ctname = $request->post('ctname');
             $clients->email = $request->post('email');
             $clients->phone_no = $request->post('phone');

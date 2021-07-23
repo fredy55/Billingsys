@@ -15,8 +15,8 @@ class CreateBillingItemsTable extends Migration
     {
         Schema::create('billing_items', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('bill_no')->unique();
-            $table->bigInteger('service_id')->unique();
+            $table->bigInteger('bill_no');
+            $table->bigInteger('service_id');
             $table->string('item');
             $table->decimal('price', 8, 2);
             $table->integer('quantity');

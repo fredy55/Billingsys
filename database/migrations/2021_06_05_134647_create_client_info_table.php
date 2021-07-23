@@ -15,6 +15,7 @@ class CreateClientInfoTable extends Migration
     {
         Schema::create('client_info', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('compId');
             $table->string('ctname');
             $table->string('email')->unique();
             $table->string('phone_no');

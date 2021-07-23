@@ -43,13 +43,8 @@
 		<!-- dark-theme css-->
 		<link href="{{ asset('css/style-dark.css') }}" rel="stylesheet">
 
-		<!-- Internal  Data table css -->
-		<link href="{{ asset('plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
-		<link href="{{ asset('plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
-		<link href="{{ asset('plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
-		<link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+		<!-- Toastr CSS -->
+		<link rel="stylesheet" href="{{ asset('toastr/css/toastr.css') }}"  rel="stylesheet" />
 
 	</head>
 	
@@ -125,28 +120,11 @@
 		<!-- Sticky js-->
 		<script src="{{ asset('js/sticky.js') }}"></script>
 
-		<!-- Internal Data tables -->
-		<script src="{{ asset('plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/jquery.dataTables.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/jszip.min.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/pdfmake.min.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/vfs_fonts.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/buttons.html5.min.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/buttons.print.min.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-		<script src="{{ asset('plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
+		<!-- Product jQuery --> 
+		<script src="{{ asset('toastr/js/jquery.min.js') }}"></script>
+		<script src="{{ asset('toastr/js/toastr.js') }}"></script>
 
-		<!-- Internal Datatable js -->
-		<script src="{{ asset('js/table-data.js') }}"></script>
-		
-		<!-- Internal Data tables -->
+		<!-- Extra javascripts -->
 		@yield('scripts')
 
 		<!-- Custom js-->
