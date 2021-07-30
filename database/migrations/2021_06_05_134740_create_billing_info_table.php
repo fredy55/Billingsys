@@ -16,7 +16,7 @@ class CreateBillingInfoTable extends Migration
         Schema::create('billing_info', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('bill_no')->unique();
-            $table->bigInteger('client_id')->unique();
+            $table->bigInteger('client_id');
             $table->string('type');
             $table->decimal('total_amt', 8, 2);
             $table->decimal('amt_paid', 8, 2);

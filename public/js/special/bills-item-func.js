@@ -56,7 +56,7 @@ function toastrMessage(action) {
 }
 
 function addItem() {
-	alert($("#itemId").val()+' : '+$("#itemPrice").val()+' : '+$("#itemName").val()+' : '+$("#itemQty").val());
+	//alert($("#itemId").val()+' : '+$("#itemPrice").val()+' : '+$("#itemName").val()+' : '+$("#itemQty").val());
 	
 	let itemId = Number($("#itemId").val());
 	let name = $("#itemName").val();
@@ -74,6 +74,41 @@ function addItem() {
 
 //save item to session storage
 function saveItemToStorage(itemId, name, detail, price,quantity,total) {
+	let servItems = JSON.parse(sessionStorage.getItem("service-item"));
+	
+	let arrayItem = {
+	   code : itemId,
+	   name: name,
+	   detail: detail,
+	   price: price,
+	   qty: quantity,
+	   total:total
+	} 
+
+	//Avoid repeatation
+	for (let i = 0; i < servItems.length; i++) { 
+	  //alert(servItems[i].testType+" - "+arrayItem.testType)
+	  if (servItems[i].code === arrayItem.code) {
+		alert("Item is aready added to list!");
+		return;
+	  }
+	}
+	 //console.log("SESSION ITEMS",servItems);
+	 //console.log("FORM ITEMS",arrayItem);
+	 servItems.push(arrayItem); //add item to array 
+	
+	//console.log(arrayItem);
+	
+	//save item to session storage
+	sessionStorage.setItem("service-item", JSON.stringify(servItems)); 
+	
+	//load drug items
+	loadservItems();
+	
+  }
+
+//save item to session storage
+function paymentComp(amount) {
 	let servItems = JSON.parse(sessionStorage.getItem("service-item"));
 	
 	let arrayItem = {
@@ -148,10 +183,20 @@ function saveItemToStorage(itemId, name, detail, price,quantity,total) {
 	//    let addItem = document.getElementsByClassName("drug-items-frame")[0];
 	//    addItem.innerHTML = cartRow;
 	   
+	   //Check for zero values
+	   limitVal($('#amtpaid').val());
+	   limitVal($('#totbal').val());
+        
+	   if(totCost==0 || totCost<$('#amtpaid').val() || $('#amtpaid').val()<0){
+		  $('#totbal').val(0);
+		  $('#amtpaid').val(0);
+	   }
+
 	   //Total drug cost
 	   $('#show-items').html(cartRow);
 	   $('#gtotal').text(totCost);
 	   $('#totCost').val(totCost);
+	   $('#totbal').val(totCost - $('#amtpaid').val());
 	   
 		//Click to remove cart item let 
 		removeTestItem = document.getElementsByClassName("remove-item");
@@ -230,6 +275,10 @@ function removeItem(event) {
 	loadservItems();
 	
   }
+
+function limitVal(field){
+	return field < 0 ? 0 : field;
+}
 
 
 

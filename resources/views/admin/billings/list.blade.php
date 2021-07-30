@@ -13,7 +13,7 @@
                 <div class="d-flex">
                     <h4 class="content-title mb-0 my-auto">Billing Info</h4>
                     <span class="text-muted mt-1 tx-13 ml-2 mb-0">
-                        <a href="{{ route('company.list') }}">/ Billing List</a>
+                        <a href="{{ route('bills.list') }}">/ Billing List</a>
                     </span>
                 </div>
             </div>
@@ -45,30 +45,41 @@
                                 <thead>
                                     <tr>
                                         <th class="border-bottom-0">S/N</th>
-                                        <th class="border-bottom-0">Company Name</th>
-                                        <th class="border-bottom-0">Email</th>
-                                        <th class="border-bottom-0">Phone</th>
-                                        <th class="border-bottom-0">City</th>
-                                        <th class="border-bottom-0">State</th>
+                                        <th class="border-bottom-0">Bill N<u>o</u></th>
+                                        <th class="border-bottom-0">Client Name</th>
+                                        <th class="border-bottom-0">Total Amount</th>
                                         <th class="border-bottom-0">Date Created</th>
                                         <th class="border-bottom-0">Status</th>
                                         <th class="border-bottom-0"></th>
                                     </tr>
                                 </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th class="border-bottom-0">S/N</th>
+                                        <th class="border-bottom-0">Bill N<u>o</u></th>
+                                        <th class="border-bottom-0">Client Name</th>
+                                        <th class="border-bottom-0">Total Amount</th>
+                                        <th class="border-bottom-0">Date Created</th>
+                                        <th class="border-bottom-0">Status</th>
+                                        <th class="border-bottom-0"></th>
+                                    </tr>
+                                </tfoot>
                                 <tbody>
-                                    @if (count($compinfo)>0)
-                                       @for ($i=0; $i<count($compinfo); ++$i) 
+                                    @if (count($billinfo)>0)
+                                       @for ($i=0; $i<count($billinfo); ++$i) 
                                        <tr>
                                             <td>{{ $i+1 }}</td>
-                                            <td>{{ $compinfo[$i]->ctname }}</td>
-                                            <td>{{ $compinfo[$i]->email }}</td>
-                                            <td>{{ $compinfo[$i]->phone_no }}</td>
-                                            <td>{{ $compinfo[$i]->city }}</td>
-                                            <td>{{ $compinfo[$i]->state }}</td>
-                                            <td>{{ $compinfo[$i]->created_at }}</td>
-                                            <td>{{ $compinfo[$i]->IsActive==1?'Active':'Inactive' }}</td>
+                                            <td>{{ $billinfo[$i]->bill_no }}</td>
+                                             <td>
+                                                <a href="{{ route('clients.details', ['id'=>$billinfo[$i]->clients['id']]) }}">
+                                                    {{ $billinfo[$i]->clients['ctname'] }}
+                                                </a>
+                                            </td>
+                                            <td>&#8358;{{ number_format($billinfo[$i]->total_amt,2) }}</td>
+                                            <td>{{ Carbon\Carbon::parse($billinfo[$i]->created_at)->format('d-m-Y') }}</td>
+                                            <td>{{ $billinfo[$i]->IsActive==1?'Approved':'Pending' }}</td>
                                             <td>
-                                                <a href="{{ route('company.details', ['id'=>$compinfo[$i]->id]) }}"><i class="fas fa-search"></i></a>
+                                                <a href="{{ route('bills.details', ['id'=>$billinfo[$i]->bill_no]) }}"><i class="fas fa-search"></i> Details</a>
                                             </td>
                                         </tr> 
                                        @endfor

@@ -19,4 +19,9 @@ class Clients extends Model
 
     //Timestamp (created_at and updated_at) status
     protected $timestamp = true;
+
+    public function billinfo()
+    {
+        return $this->hasMany(Billingitem::class, 'client_id', 'id');
+    }
 }

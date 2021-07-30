@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Billing;
 
 class Billingitem extends Model
 {
@@ -19,4 +20,8 @@ class Billingitem extends Model
 
     //Timestamp (created_at and updated_at) status
     protected $timestamp = true;
+
+    public function billinfo(){
+        return $this->belongsTo(Billing::class, 'bill_no', 'id');
+    }
 }

@@ -80,6 +80,8 @@ Route::group(['prefix' => 'billings'], function () {
     Route::post('/billInfo', 'Admin\BillingController@getBillInfo')->name('bills.add.info');
     Route::post('/getBillOption', 'Admin\BillingController@getBillOptions')->name('bills.add.options');
     Route::post('/saveBill', 'Admin\BillingController@saveBill')->name('bills.add.save');
+
+    Route::get('/{id}/invoice', 'Admin\BillingController@generateRecpt')->name('bills.invoice.create');
 }); 
 
 

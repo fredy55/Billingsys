@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Billing;
 use App\Models\Billingitem;
-use App\Models\Compinfo;
 use App\Models\Clients;
+use App\Models\Compinfo;
 use App\Models\Services;
 
 class BillingController extends Controller
@@ -20,9 +20,9 @@ class BillingController extends Controller
     
     public function index()
     {
-        $compinfo=Compinfo::all();
+        $billinfo=Billing::all();
         
-        return view('admin.billings.list', ['compinfo'=>$compinfo]); 
+        return view('admin.billings.list', ['billinfo'=>$billinfo]); 
     }
 
     public function addBill(Request $request, $id)
@@ -48,6 +48,8 @@ class BillingController extends Controller
         $this->validate($request,[
             'clientId'=>'numeric|required',
             'totCost'=>'numeric|required',
+            'amtpaid'=>'numeric|required',
+            'totbal'=>'numeric|required',
         ]);
         
         //product does not exist
@@ -59,8 +61,8 @@ class BillingController extends Controller
         $bills->client_id = $request->post('clientId');
         $bills->type = 'Web';
         $bills->total_amt = $request->post('totCost');
-        $bills->amt_paid = 0;
-        $bills->balance = $request->post('totCost');
+        $bills->amt_paid = $request->post('amtpaid');
+        $bills->balance = $request->post('totbal');
 
         if($bills->save()){
            for($i=0; $i<count($request->post('name')); ++$i){
@@ -73,11 +75,45 @@ class BillingController extends Controller
                 $billItem->total = $request->post('total')[$i];
                 $billItem->save();
            }
-            
-            return redirect()->route('clients.list')->with(['success'=>'Clients added successfully!']);
+
+           return response()->json(['status' => 'success', 'message' => 'Bills saved successfully!', 'billno' => $bill_no]);
         }else{
-            return redirect()->route('clients.add')->with(['danger'=>'Clients NOT added!']);  
+            return response()->json(['status' => 'failed', 'message' => 'An error occurred please try again ']);
         }
+    }
+
+    public function show($id)
+    {
+        $data['bllinfo'] = Billing::where(['IsActive' => 1, 'bill_no'=>$id])->get(['client_id', 'bill_no', 'total_amt', 'amt_paid','balance']);
+
+        $data['billitems'] = Billingitem::select('billing_items.bill_no','service.sname','service.description','billing_items.price','billing_items.quantity','billing_items.total')
+                                          ->join('service', 'service.service_id', '=', 'billing_items.service_id')
+                                          ->where('billing_items.bill_no', $data['bllinfo'][0]->bill_no)
+                                          ->get();
+
+        $data['client'] = Clients::find($data['bllinfo'][0]->client_id);
+        $data['compinfo'] = Compinfo::find($data['client']['compId']);
+
+        //dd($data['bllinfo'][0]->total_amt);
+        
+        return view('admin.billings.details',$data); 
+    }
+
+    public function generateRecpt($id)
+    {
+        $data['bllinfo'] = Billing::where(['IsActive' => 1, 'bill_no'=>$id])->get(['client_id', 'bill_no', 'total_amt', 'amt_paid','balance']);
+
+        $data['billitems'] = Billingitem::select('billing_items.bill_no','service.sname','service.description','billing_items.price','billing_items.quantity','billing_items.total')
+                                          ->join('service', 'service.service_id', '=', 'billing_items.service_id')
+                                          ->where('billing_items.bill_no', $data['bllinfo'][0]->bill_no)
+                                          ->get();
+
+        $data['client'] = Clients::find($data['bllinfo'][0]->client_id);
+        $data['compinfo'] = Compinfo::find($data['client']['compId']);
+
+        //dd($data['bllinfo'][0]->total_amt);
+        
+        return view('admin.billings.invoice',$data); 
     }
     
 }

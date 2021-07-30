@@ -90,7 +90,7 @@
                                 <div class="col-md-3 col-lg-3 col-xs-12">
                                     <div class="form-group">
                                         <strong>Quantity</strong>  
-                                        <input id="itemQty" type="number" class="form-control" placeholder="Enter qty of items" required />
+                                        <input id="itemQty" type="number" class="form-control" onkeyup="if(this.value<1){this.value=1;}" onclick="if(this.value<1){this.value=1;}" placeholder="Enter qty of items" required />
                                     </div>
                                 </div>
 
@@ -101,7 +101,7 @@
 
                             @include('inc.flashmsg')
 
-                            <form method="POST" action="{{ route('bills.add.save') }}" >
+                            <form action="#." method="POST" id="sub_bill" >
                                 @csrf
                                 
                                 <div class="table-responsive mg-t-10">
@@ -113,7 +113,7 @@
                                                 <th class="wd-20p">Description</th>
                                                 <th class="tx-center">QTY</th>
                                                 <th class="tx-right">Unit Price</th>
-                                                <th class="tx-right">Total</th>
+                                                <th class="tx-right" width="20px">Total</th>
                                                 <th class="tx-right"></th>
                                             </tr>
                                         </thead>
@@ -134,15 +134,40 @@
                                                 </th>
                                                 <th class="tx-right"></th>
                                             </tr>
+
+                                            <tr>
+                                                <th class="wd-5p"></th>
+                                                <th class="wd-20p"></th>
+                                                <th class="wd-20p"></th>
+                                                <th class="tx-center"></th>
+                                                <th class="tx-right">Amount Paid</th>
+                                                <th class="tx-right">
+                                                    <input type="number" id="amtpaid" name="amtpaid" value="0" onkeyup="loadservItems();" onclick="loadservItems();" required />
+                                                </th>
+                                                <th class="tx-right"></th>
+                                            </tr>
+
+                                            <tr>
+                                                <th class="wd-5p"></th>
+                                                <th class="wd-20p"></th>
+                                                <th class="wd-20p"></th>
+                                                <th class="tx-center"></th>
+                                                <th class="tx-right">Balance</th>
+                                                <th class="tx-right">
+                                                    <input type="number" id="totbal" name="totbal" value="0" onkeyup="if(this.value<0){this.value=0;}" onclick="if(this.value<0){this.value=0;}" readonly required />
+                                                </th>
+                                                <th class="tx-right"></th>
+                                            </tr>
+                                            
                                         </tfoot>
                                     </table>
                                 
-
-                                    
                                 </div>
     
-                                <button type="submit" class="btn btn-primary mg-t-40 float-left">Save Invoice</button>
+                                <button id="post_bill" type="button" class="btn btn-primary mg-t-40 float-left">Save Invoice</button>
                             </form>
+
+                            <input type="hidden" value="{{ route('bills.add.save') }}" id="sub_bill_post_url">
                         </div>
                     </div>
                 </div>
@@ -160,5 +185,72 @@
 @section('scripts')
     <!-- Bill items js-->
 	<script src="{{ asset('js/special/bills-item-func.js') }}"></script>
+    
+    <script>
+        $(document).ready(function() {
+            //alert('its working');
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
+            //save poll
+            $('#post_bill').click(function () {
+                //alert($('#totCost').val());
+                
+                if($('#totCost').val()!=0){
+                    $('#post_bill').html('<i class="fa fa-refresh fa-spin"></i>');
+
+                    $.ajax({
+                        url: $('#sub_bill_post_url').val(),
+                        method: "POST",
+                        data: $('#sub_bill').serialize(),
+                        success: function (data) {
+                            //alert(data);
+                            if (data.status === 'failed') {
+                                toastr.error(data.message, 'Warning')
+                            }
+                            toastr.success(data.message, 'Success')
+
+                            $('#post_bill').html('Transaction Approved')
+                            $('#post_bill').hide();
+
+                            //Clear billing form
+                            sessionStorage.clear();
+
+                            setTimeout(function () {
+                                window.location.href = "/billings/view/" + data.billno
+                            }, 5000)
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            let errorBody = jqXHR.responseJSON;
+                            $.each(errorBody.errors, function (key, item) {
+                                toastr.error(item, key)
+                            });
+                            $('#post_bill').html('Save Invoice')
+                        },
+                    });
+                }else{
+                    toastr.error('Please, add a bill.', 'Warning')
+                }
+                
+            });
+
+        });
+   </script>
 
 @endsection
