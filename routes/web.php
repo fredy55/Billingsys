@@ -57,6 +57,7 @@ Route::group(['prefix' => 'company'], function () {
     Route::post('/save', 'Admin\CompinfoController@store')->name('company.save');
     Route::get('/edit/{id}', 'Admin\CompinfoController@edit')->name('company.edit');
     Route::post('/update', 'Admin\CompinfoController@update')->name('company.update');
+    Route::post('/{id}/updateimg', 'Admin\CompinfoController@updateImg')->name('company.profile.update');
     Route::get('/delete/{id}', 'Admin\CompinfoController@destroy')->name('company.delete');
 }); 
 

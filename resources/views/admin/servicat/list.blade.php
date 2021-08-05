@@ -61,7 +61,7 @@
                                             <td>{{ $i+1 }}</td>
                                             <td>{{ $servcat[$i]->category }}</td>
                                             <td>{{ $servcat[$i]->description }}</td>
-                                            <td>{{ $servcat[$i]->created_at }}</td>
+                                            <td>{{ Carbon\Carbon::parse($servcat[$i]->created_at)->format('d-m-Y') }}</td>
                                             <td>{{ $servcat[$i]->IsActive==1?'Active':'Inactive' }}</td>
                                             {{-- <td>
                                                 <a href=""><i class="fas fa-search"></i></a>

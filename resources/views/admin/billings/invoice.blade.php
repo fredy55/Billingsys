@@ -6,7 +6,11 @@
 @section('contents')
 <header class="clearfix">
     <div id="logo">
-      <img src="{{ asset('img/brand/logo.png') }}" alt="Company Logo" />
+      @if ($compinfo->img_url!=="nil")
+        <img alt="avatar" src="{{ asset($compinfo->img_url) }}" alt="Company Logo" width="85px"/>
+      @else
+          <img alt="avatar" src="{{ asset('img/brand/logo.png') }}" alt="Company Logo" width="85px"/>
+      @endif
     </div>
     <div id="company">
       <h2 class="name">{{ $compinfo['ctname'] }}</h2>
@@ -25,9 +29,10 @@
         <div class="email"><a href="#">{{ $client['email'] }}</a></div>
       </div>
       <div id="invoice">
+        <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('817', 'C39')}}" alt="barcode" />
         <h1>INVOICE {{ $bllinfo[0]->bill_no }}</h1>
-        <div class="date">Date of Invoice: {{ Carbon\Carbon::parse($bllinfo[0]->bill_no)->format('d-m-Y') }}</div>
-        <div class="date">Due Date: {{ Carbon\Carbon::parse($bllinfo[0]->bill_no)->format('d-m-Y') }}</div>
+        <div class="date"><strong>Date of Invoice:</strong> {{ Carbon\Carbon::parse($bllinfo[0]->bill_no)->format('d-m-Y') }}</div>
+        {{-- <div class="date">Due Date: {{ Carbon\Carbon::parse($bllinfo[0]->bill_no)->format('d-m-Y') }}</div> --}}
       </div>
     </div>
 
@@ -62,25 +67,38 @@
       <tfoot>
         <tr>
           <td colspan="2"></td>
-          <td colspan="2">GRAND TOTAL</td>
+          <td colspan="2">TAX:</td>
+          <td>&#8358;{{ number_format(0,2) }}</td>
+        </tr>
+        <tr>
+          <td colspan="2"></td>
+          <td colspan="2">GRAND TOTAL:</td>
           <td>&#8358;{{ number_format($bllinfo[0]->total_amt,2) }}</td>
         </tr>
-        <tr>
-          <td colspan="2"></td>
-          <td colspan="2">AMOUNT PAID</td>
-          <td>&#8358;{{ number_format($bllinfo[0]->amt_paid,2) }}</td>
-        </tr>
-        <tr>
-          <td colspan="2"></td>
-          <td colspan="2">BALANCE</td>
-          <td>&#8358;{{ number_format($bllinfo[0]->balance,2) }}</td>
-        </tr>
+        @if ($bllinfo[0]->balance==0)
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">AMOUNT PAID:</td>
+            <td>&#8358;{{ number_format($bllinfo[0]->amt_paid,2) }}</td>
+          </tr>
+        @else
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">AMOUNT PAID:</td>
+            <td>&#8358;{{ number_format($bllinfo[0]->amt_paid,2) }}</td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">BALANCE:</td>
+            <td>&#8358;{{ number_format($bllinfo[0]->balance,2) }}</td>
+          </tr>
+        @endif
       </tfoot>
     </table>
-    <div id="thanks">Thank you!</div>
+    {{-- <div id="thanks">Thank you for your patronage!</div> --}}
     <div id="notices">
       <div>NOTICE:</div>
-      <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+      <div class="notice">This invoice is generated from our company billing system. Thank you for your patronage!</div>
     </div>
   </main>
   <footer>

@@ -6,9 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Compinfo;
+use App\Traits\Imgupload;
 
 class CompinfoController extends Controller
 {
+   //Call the image upload trait
+   use Imgupload;
+   
     //Admin authentication
     public function __construct(){
         $this->middleware('auth:admin');
@@ -26,12 +30,6 @@ class CompinfoController extends Controller
         return view('admin.company.list', ['compinfo'=>$compinfo]); 
     }
 
-        /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $compinfo=Compinfo::find($id);
@@ -150,6 +148,37 @@ class CompinfoController extends Controller
             }
         }else{
             return redirect()->route('company.add')->with(['warning'=>'Company already exist!']);  
+        }
+
+    }
+
+    public function updateImg(Request $request, $id)
+    {
+        $img_url = $this->getSingleImg($request, 'image');
+
+        //Company exist
+        $imgQuery=Compinfo::where('id',$id);
+
+        //check previous image
+        $previmg = $imgQuery->get(['img_url']);
+
+        //dd($previmg[0]['img_url']);
+
+        if($previmg[0]['img_url']!=="nil"){
+             unlink($previmg[0]['img_url']);
+        }
+
+        if($imgQuery->exists()){
+
+            $uploadImg = $imgQuery->update(['img_url'=>$img_url]);
+
+            if($uploadImg){
+                return redirect()->route('company.details', ['id'=>$id])->with(['success'=>'Company Logo updated successfully!']);
+            }else{
+                return redirect()->route('company.details', ['id'=>$id])->with(['warning'=>'Company Logo NOT updated!']);  
+            }
+        }else{
+            return redirect()->route('company.details', ['id'=>$id])->with(['danger'=>'Company does NOT exist!']);  
         }
 
     }

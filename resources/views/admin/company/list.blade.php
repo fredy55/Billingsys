@@ -52,7 +52,6 @@
                                         <th class="border-bottom-0">State</th>
                                         <th class="border-bottom-0">Date Created</th>
                                         <th class="border-bottom-0">Status</th>
-                                        <th class="border-bottom-0"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -60,16 +59,17 @@
                                        @for ($i=0; $i<count($compinfo); ++$i) 
                                        <tr>
                                             <td>{{ $i+1 }}</td>
-                                            <td>{{ $compinfo[$i]->ctname }}</td>
+                                            <td>
+                                                <a href="{{ route('company.details', ['id'=>$compinfo[$i]->id]) }}">
+                                                    {{ $compinfo[$i]->ctname }}
+                                                </a>
+                                            </td>
                                             <td>{{ $compinfo[$i]->email }}</td>
                                             <td>{{ $compinfo[$i]->phone_no }}</td>
                                             <td>{{ $compinfo[$i]->city }}</td>
                                             <td>{{ $compinfo[$i]->state }}</td>
-                                            <td>{{ $compinfo[$i]->created_at }}</td>
+                                            <td>{{ Carbon\Carbon::parse($compinfo[$i]->created_at)->format('d-m-Y') }}</td>
                                             <td>{{ $compinfo[$i]->IsActive==1?'Active':'Inactive' }}</td>
-                                            <td>
-                                                <a href="{{ route('company.details', ['id'=>$compinfo[$i]->id]) }}"><i class="fas fa-search"></i></a>
-                                            </td>
                                         </tr> 
                                        @endfor
                                     @endif

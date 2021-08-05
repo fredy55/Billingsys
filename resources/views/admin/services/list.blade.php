@@ -63,7 +63,7 @@
                                             <td>{{ $services[$i]->category }}</td>
                                             <td>{{ $services[$i]->sname }}</td>
                                             <td>{{ number_format($services[$i]->price, 2) }}</td>
-                                            <td>{{ $services[$i]->created_at }}</td>
+                                            <td>{{ Carbon\Carbon::parse($services[$i]->created_at)->format('d-m-Y') }}</td>
                                             <td>{{ $services[$i]->IsActive==1?'Active':'Inactive' }}</td>
                                             <td>
                                                 <a href=""><i class="fas fa-search"></i></a>

@@ -34,7 +34,11 @@
                                 <div class="billed-from">
                                         <p>
                                         <h6>
-                                            <img src="{{ asset('img/brand/logo.png') }}" alt="Company Logo" width="80px"/>
+                                           @if ($compinfo->img_url!=="nil")
+                                              <img alt="avatar" src="{{ asset($compinfo->img_url) }}" alt="Company Logo" width="65px"/>
+                                            @else
+                                                <img alt="avatar" src="{{ asset('img/brand/logo.png') }}" alt="Company Logo" width="65px"/>
+                                            @endif
                                             {{ $compinfo['ctname'] }}
                                         </h6>
                                         <address>{{ $compinfo['addressln1'] }}, {{ $compinfo['city'] }}, {{ $compinfo['state'] }}, {{ $compinfo['country'] }}</address>   

@@ -68,7 +68,7 @@
                                             <td>{{ $clients[$i]->phone_no }}</td>
                                             <td>{{ $clients[$i]->city }}</td>
                                             <td>{{ $clients[$i]->state }}</td>
-                                            <td>{{ $clients[$i]->created_at }}</td>
+                                            <td>{{ Carbon\Carbon::parse($clients[$i]->created_at)->format('d-m-Y') }}</td>
                                             <td>{{ $clients[$i]->IsActive==1?'Active':'Inactive' }}</td>
                                         </tr> 
                                        @endfor

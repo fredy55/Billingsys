@@ -28,21 +28,27 @@
         
         <!-- row -->
         <div class="row row-sm">
-            <div class="col-sm-12 col-md-12 col-xl-8">
+            <div class="col-sm-12 col-md-12 col-xl-12">
                 <div class="">
                     <a class="main-header-arrow" href="#" id="ChatBodyHide"><i class="icon ion-md-arrow-back"></i></a>
                     <div class="main-content-body main-content-body-contacts card custom-card">
                         <div class="main-contact-info-header pt-3">
                             <div class="media">
                                 <div class="main-img-user">
-                                    <img alt="avatar" src="{{ asset('img/faces/6.jpg') }}"> <a href="#"><i class="fe fe-camera"></i></a>
+                                    @if ($compinfo->img_url!=="nil")
+                                       <img alt="avatar" src="{{ asset($compinfo->img_url) }}">
+                                    @else
+                                       <img alt="avatar" src="{{ asset('img/profile.jpg') }}"> 
+                                    @endif
+                                     <a href="#modaldemo8" data-effect="effect-flip-vertical" data-toggle="modal">
+                                         <i class="fe fe-camera"></i>
+                                    </a>
                                 </div>
                                 <div class="media-body">
                                     <h5>{{ $compinfo->ctname }}</h5>
                                     <p>{{ $compinfo->cac_num }}</p>
                                     <nav class="contact-info">
                                         <a href="#" class="contact-icon border tx-inverse" data-toggle="tooltip" title="Call"><i class="fe fe-phone"></i></a>
-                                        <a href="#" class="contact-icon border tx-inverse" data-toggle="tooltip" title="Video"><i class="fe fe-video"></i></a>
                                         <a href="#" class="contact-icon border tx-inverse" data-toggle="tooltip" title="message"><i class="fe fe-message-square"></i></a>
                                         <a href="#" class="contact-icon border tx-inverse" data-toggle="tooltip" title="Add to Group"><i class="fe fe-user-plus"></i></a>
                                         <a href="#" class="contact-icon border tx-inverse" data-toggle="tooltip" title="Block"><i class="fe fe-slash"></i></a>
@@ -108,6 +114,44 @@
 
     </div>
     <!-- Container closed -->
+
+    <!-- Modal effects -->
+		<div class="modal" id="modaldemo8" data-backdrop="static">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content modal-content-demo">
+					<div class="modal-header">
+						<h6 class="modal-title">
+                            <img src="{{ asset('img/brand/logo.png') }}" alt="Company Logo" />
+                            Company Logo Upload
+                        </h6>
+						<button aria-label="Close" class="close" data-dismiss="modal" type="button">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+                <form method="POST" action="{{ route('company.profile.update', ['id'=>$compinfo->id]) }}" enctype="multipart/form-data">
+					
+                    <div class="modal-body">
+						<p>
+                            
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 col-xs-12">
+                                    <div class="form-group">
+                                        <input name="image" id="profileimg" type="file" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </p>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn ripple btn-primary" type="button">Upload Picture</button>
+						<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Close</button>
+					</div>
+                </form>
+				</div>
+			</div>
+		</div>
+		<!-- End Modal effects-->
 @endsection
 
 @section('scripts')
