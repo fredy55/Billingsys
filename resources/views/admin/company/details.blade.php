@@ -51,7 +51,7 @@
                             </div>
                             <div class="main-contact-action btn-list pt-3 pr-3">
                                 <a href="{{ route('company.edit', ['id'=>$compinfo->id]) }}" class="btn ripple btn-primary text-white btn-icon" data-placement="top" data-toggle="tooltip" title="Edit Profile"><i class="fe fe-edit"></i></a>
-                                <a href="{{ route('company.delete', ['id'=>$compinfo->id]) }}" class="btn ripple btn-secondary text-white btn-icon" data-placement="top" data-toggle="tooltip" title="Delete Profile"><i class="fe fe-trash-2"></i></a>
+                                <a href="{{ route('company.delete', ['id'=>$compinfo->id]) }}" onclick="confirm('Do you want to delete this record?')" class="btn ripple btn-secondary text-white btn-icon" data-placement="top" data-toggle="tooltip" title="Delete Profile"><i class="fe fe-trash-2"></i></a>
                             </div>
                         </div>
                         <div class="main-contact-info-body p-4">

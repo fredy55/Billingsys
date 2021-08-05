@@ -1,7 +1,7 @@
 @extends('admin.layouts.invoices')
 
 <!-- Website title -->
-@section('title', 'Client Invoice')
+@section('title', $compinfo['ctname'].' | Client Invoice')
 
 @section('contents')
 <header class="clearfix">

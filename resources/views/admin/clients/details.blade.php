@@ -41,7 +41,7 @@
                                     <h5>{{ $clients->ctname }}</h5>
                                     <p>{{ $clients->cac_num }}</p>
                                     <nav class="contact-info">
-                                        <a href="{{ route('bills.add', ['id'=>$clients->id]) }}" class="contact-icon border tx-inverse" data-toggle="tooltip" title="Add Bills (Invoice)"><i class="fe fe-file"></i></a>
+                                        <a href="" class="contact-icon border tx-inverse" data-toggle="tooltip" title=""><i class="fe fe-file"></i></a>
                                         <a href="#" class="contact-icon border tx-inverse" data-toggle="tooltip" title="message"><i class="fe fe-message-square"></i></a>
                                         <a href="#" class="contact-icon border tx-inverse" data-toggle="tooltip" title="Add to Group"><i class="fe fe-user-plus"></i></a>
                                         <a href="#" class="contact-icon border tx-inverse" data-toggle="tooltip" title="Block"><i class="fe fe-slash"></i></a>
@@ -49,8 +49,12 @@
                                 </div>
                             </div>
                             <div class="main-contact-action btn-list pt-3 pr-3">
+                                <a href="{{ route('bills.add', ['id'=>$clients->id]) }}" class="btn btn-primary text-white btn-md" style="font-size:14px;font-weight:500;" data-placement="top" data-toggle="tooltip" title="Add Bills (Invoice)">
+                                    <i class="fe fe-plus"></i> 
+                                    Add Bill
+                                </a>
                                 <a href="{{ route('clients.edit', ['id'=>$clients->id]) }}" class="btn ripple btn-primary text-white btn-icon" data-placement="top" data-toggle="tooltip" title="Edit Profile"><i class="fe fe-edit"></i></a>
-                                <a href="{{ route('clients.delete', ['id'=>$clients->id]) }}" class="btn ripple btn-secondary text-white btn-icon" data-placement="top" data-toggle="tooltip" title="Delete Profile"><i class="fe fe-trash-2"></i></a>
+                                <a href="{{ route('clients.delete', ['id'=>$clients->id]) }}" onclick="confirm('Do you want to delete this record?')" class="btn ripple btn-secondary text-white btn-icon" data-placement="top" data-toggle="tooltip" title="Delete Profile"><i class="fe fe-trash-2"></i></a>
                             </div>
                         </div>
                         <div class="main-contact-info-body p-4">

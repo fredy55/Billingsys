@@ -82,6 +82,8 @@ Route::group(['prefix' => 'billings'], function () {
     Route::post('/saveBill', 'Admin\BillingController@saveBill')->name('bills.add.save');
 
     Route::get('/{id}/invoice', 'Admin\BillingController@generateRecpt')->name('bills.invoice.create');
+    Route::get('/{id}/delete', 'Admin\BillingController@destroy')->name('bills.invoice.delete');
+    Route::post('/pay/update', 'Admin\BillingController@payUpdate')->name('bills.pay.update');
 }); 
 
 

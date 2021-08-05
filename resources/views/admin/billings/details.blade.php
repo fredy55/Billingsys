@@ -43,7 +43,9 @@
                                     </p>
                                 </div><!-- billed-from -->
                             </div>
-                            
+
+                            @include('inc.flashmsg')
+
                             <!-- Invoice-information -->
                             <div class="row mg-t-20">
                                 <div class="col-md-6">
@@ -132,18 +134,20 @@
                                                 </a>
                                             </th>
                                             <th>
+                                               @if ($bllinfo[0]->balance>0)
                                                 <a href="#modaldemo8" data-effect="effect-flip-vertical" data-toggle="modal" type="button" class="btn btn-primary btn-md">
                                                     <i class="fa fa-credit-card"></i> Make Payment
                                                 </a>
+                                               @endif
                                             </th>
                                             <th colspan="6"></th>
                                             <th>
-                                                <a href="" type="button" class="btn btn-primary btn-md">
+                                                <a href="#" type="button" class="btn btn-primary btn-md">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                             </th>
                                             <th>
-                                                <a href="" type="button" class="btn btn-danger btn-md">
+                                                <a href="{{ route('bills.invoice.delete', ['id'=>$bllinfo[0]->bill_no]) }}" type="button" onclick="confirm('Do you want to delete this record?')" class="btn btn-danger btn-md">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </th>
@@ -175,7 +179,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-                <form method="POST" action="{{ route('company.save') }}">
+                <form method="POST" action="{{ route('bills.pay.update') }}">
 					
                     <div class="modal-body">
 						<h4 style="text-align: center;">Invoice Payment (Ref: #{{ $bllinfo[0]->bill_no }})</h4>
@@ -186,16 +190,16 @@
                                     <div class="form-group">
                                         <label>Grand Total</label> 
                                         <input name="totgrand" id="totgrand" type="number" value="{{ $bllinfo[0]->total_amt }}" class="form-control" readonly />
-                                        <input name="id" type="hidden" value="{{ $bllinfo[0]->bill_no }}" class="form-control" />
+                                        <input name="id" type="hidden" value="{{ $bllinfo[0]->id }}" class="form-control" />
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-12 col-lg-12 col-xs-12">
                                     <div class="form-group">
-                                        <label>Amount to Pay</label> 
-                                        <input name="payamt" id="payamt" type="number" class="form-control" placeholder="e.g. #2,300.00" />
+                                        <label>Total Payment</label> 
+                                        <input name="totpay" id="totpay" type="number" value="{{ $bllinfo[0]->amt_paid }}" class="form-control" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -205,10 +209,19 @@
                                     <div class="form-group">
                                         <label>Total Balance</label> 
                                         <input name="baltot" id="baltot" type="number" value="{{ $bllinfo[0]->balance }}" class="form-control" readonly />
+                                        <input id="baltot2" type="hidden" value="{{ $bllinfo[0]->balance }}" class="form-control" readonly />
                                     </div>
                                 </div>
                             </div>
-    
+                            
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Amount to Pay</label> 
+                                        <input name="payamt" id="payamt" type="number" onkeyup="paymentComp();" onchange="paymentComp(this.value);" class="form-control" placeholder="e.g. #2,300.00" required />
+                                    </div>
+                                </div>
+                            </div>
                         </p>
 					</div>
 					<div class="modal-footer">

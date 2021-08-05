@@ -52,7 +52,6 @@
                                         <th class="border-bottom-0">State</th>
                                         <th class="border-bottom-0">Date Created</th>
                                         <th class="border-bottom-0">Status</th>
-                                        <th class="border-bottom-0"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -60,16 +59,17 @@
                                        @for ($i=0; $i<count($clients); ++$i) 
                                        <tr>
                                             <td>{{ $i+1 }}</td>
-                                            <td>{{ $clients[$i]->ctname }}</td>
+                                            <td>
+                                                <a href="{{ route('clients.details', ['id'=>$clients[$i]->id]) }}">
+                                                    {{ $clients[$i]->ctname }}
+                                                </a>
+                                            </td>
                                             <td>{{ $clients[$i]->email }}</td>
                                             <td>{{ $clients[$i]->phone_no }}</td>
                                             <td>{{ $clients[$i]->city }}</td>
                                             <td>{{ $clients[$i]->state }}</td>
                                             <td>{{ $clients[$i]->created_at }}</td>
                                             <td>{{ $clients[$i]->IsActive==1?'Active':'Inactive' }}</td>
-                                            <td>
-                                                <a href="{{ route('clients.details', ['id'=>$clients[$i]->id]) }}"><i class="fas fa-search"></i></a>
-                                            </td>
                                         </tr> 
                                        @endfor
                                     @endif

@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		
 		<!-- Title -->
-        <title> {{ env('APP_NAME') }} | @yield('title')</title>
+        <title>@yield('title')</title>
 
 		<!-- Favicon -->
 		<link rel="icon" href="{{ asset('img/brand/favicon.png') }}" type="image/x-icon"/>

@@ -82,9 +82,33 @@ class BillingController extends Controller
         }
     }
 
+    public function payUpdate(Request $request)
+    { 
+        //validate form data
+        $this->validate($request,[
+            'totgrand'=>'numeric|required',
+            'id'=>'numeric|required',
+            'totpay'=>'numeric|required',
+            'baltot'=>'numeric|required',
+            'payamt'=>'numeric|required',
+        ]);
+        
+        
+        $bills = Billing::find($request->post('id'));
+        $bills->amt_paid = $request->post('totpay') + $request->post('payamt');
+        $bills->balance = $request->post('totgrand') - ($request->post('totpay') + $request->post('payamt'));
+        $bills->updated_at = date("Y-m-d h:i:s");
+
+        if($bills->save()){
+            return redirect()->route('bills.details', ['id'=>$bills->bill_no])->with(['success'=>'Billing updated successfully!']);
+        }else{
+            return redirect()->route('bills.details', ['id'=>$bills->bill_no])->with(['success'=>'Billing NOT updated!']);
+        }
+    }
+
     public function show($id)
     {
-        $data['bllinfo'] = Billing::where(['IsActive' => 1, 'bill_no'=>$id])->get(['client_id', 'bill_no', 'total_amt', 'amt_paid','balance']);
+        $data['bllinfo'] = Billing::where(['IsActive' => 1, 'bill_no'=>$id])->get(['id','client_id', 'bill_no', 'total_amt', 'amt_paid','balance']);
 
         $data['billitems'] = Billingitem::select('billing_items.bill_no','service.sname','service.description','billing_items.price','billing_items.quantity','billing_items.total')
                                           ->join('service', 'service.service_id', '=', 'billing_items.service_id')
@@ -114,6 +138,27 @@ class BillingController extends Controller
         //dd($data['bllinfo'][0]->total_amt);
         
         return view('admin.billings.invoice',$data); 
+    }
+
+    public function destroy($id)
+    {
+        $billQuery=Billing::where('bill_no', $id);
+        $bitemQuery=Billingitem::where('bill_no', $id);
+
+        if($billQuery->exists()){
+            $delbill= $billQuery->delete();
+            $delbitem= $bitemQuery->delete();
+
+            if($delbill && $delbitem){
+                
+                return redirect()->route('bills.list')->with(['success'=>'Billing deleted successfully!']);
+            }else{
+                return redirect()->route('bills.details', ['id'=>$id])->with(['warning'=>'Billing NOT deleted!']);
+            }
+        }else{
+            return redirect()->route('bills.details', ['id'=>$id])->with(['danger'=>'An error occured! Please, try again.']);
+        }
+        
     }
     
 }

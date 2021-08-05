@@ -107,41 +107,6 @@ function saveItemToStorage(itemId, name, detail, price,quantity,total) {
 	
   }
 
-//save item to session storage
-function paymentComp(amount) {
-	let servItems = JSON.parse(sessionStorage.getItem("service-item"));
-	
-	let arrayItem = {
-	   code : itemId,
-	   name: name,
-	   detail: detail,
-	   price: price,
-	   qty: quantity,
-	   total:total
-	} 
-	
-	//Avoid repeatation
-	for (let i = 0; i < servItems.length; i++) { 
-	  //alert(servItems[i].testType+" - "+arrayItem.testType)
-	  if (servItems[i].code === arrayItem.code) {
-		alert("Item is aready added to list!");
-		return;
-	  }
-	}
-	 //console.log("SESSION ITEMS",servItems);
-	 //console.log("FORM ITEMS",arrayItem);
-	 servItems.push(arrayItem); //add item to array 
-	
-	//console.log(arrayItem);
-	
-	//save item to session storage
-	sessionStorage.setItem("service-item", JSON.stringify(servItems)); 
-	
-	//load drug items
-	loadservItems();
-	
-  }
-
   function loadservItems() {
 	let servItems = JSON.parse(sessionStorage.getItem("service-item"));
 	let cartRow = "";
@@ -209,7 +174,6 @@ function paymentComp(amount) {
 	
   }
   
-
 function getOptions(itemId) {
 	//alert(itemId);
 	var queryString = "";
@@ -280,7 +244,30 @@ function limitVal(field){
 	return field < 0 ? 0 : field;
 }
 
+//compute instalmental payments
+function paymentComp() {
+	
+	//Check for zero values
+	let grandtot = parseFloat($('#totgrand').val());
+	let baltot = parseFloat($('#baltot').val());
+	let baltot2 = parseFloat($('#baltot2').val());
+	let amount = parseFloat($('#payamt').val());
 
+	//alert('Grandtot: '+grandtot+' - Payamt: '+amount+' - Balance: '+baltot+' - paid: '+totpay);
+	
+	if(amount<0 && amount!=""){
+	    $('#payamt').val("");
+	} 
+
+	if(!$.isNumeric(amount) && amount!=""){
+	    $('#payamt').val("");
+	}
+
+	if(amount>baltot || amount>grandtot){
+	    $('#payamt').val(0);
+	    $('#baltot').val(baltot2);
+	}
+}
 
 
 
