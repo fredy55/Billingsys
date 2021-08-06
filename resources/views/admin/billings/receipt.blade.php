@@ -1,7 +1,7 @@
 @extends('admin.layouts.invoices')
 
 <!-- Website title -->
-@section('title', $compinfo['ctname'].' | Client Invoice'.$bllinfo[0]->bill_no)
+@section('title', $compinfo['ctname'].' | Client Receipt'.$bllinfo[0]->bill_no)
 
 @section('contents')
 <header class="clearfix">
@@ -23,15 +23,15 @@
   <main>
     <div id="details" class="clearfix">
       <div id="client">
-        <div class="to">INVOICE TO:</div>
+        <div class="to">Issued To:</div>
         <h2 class="name">{{ $client['ctname'] }}</h2>
         <div class="address">{{ $client['addressln1'] }}, {{ $client['city'] }}, {{ $client['state'].' State' }}, {{ $client['country'] }}</div>
         <div class="email"><a href="#">{{ $client['email'] }}</a></div>
       </div>
       <div id="invoice">
         <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('817', 'C39')}}" alt="barcode" />
-        <h1>INVOICE {{ $bllinfo[0]->bill_no }}</h1>
-        <div class="date"><strong>Date of Invoice:</strong> {{ Carbon\Carbon::parse($bllinfo[0]->bill_no)->format('d-m-Y') }}</div>
+        <h1>RECEIPT {{ $bllinfo[0]->bill_no }}</h1>
+        <div class="date"><strong>Receipt Date:</strong> {{ Carbon\Carbon::parse($bllinfo[0]->created_at)->format('d-m-Y') }}</div>
         {{-- <div class="date">Due Date: {{ Carbon\Carbon::parse($bllinfo[0]->bill_no)->format('d-m-Y') }}</div> --}}
       </div>
     </div>
@@ -80,17 +80,6 @@
             <td colspan="2"></td>
             <td colspan="2">AMOUNT PAID:</td>
             <td>&#8358;{{ number_format($bllinfo[0]->amt_paid,2) }}</td>
-          </tr>
-        @else
-          <tr>
-            <td colspan="2"></td>
-            <td colspan="2">AMOUNT PAID:</td>
-            <td>&#8358;{{ number_format($bllinfo[0]->amt_paid,2) }}</td>
-          </tr>
-          <tr>
-            <td colspan="2"></td>
-            <td colspan="2">BALANCE:</td>
-            <td>&#8358;{{ number_format($bllinfo[0]->balance,2) }}</td>
           </tr>
         @endif
       </tfoot>

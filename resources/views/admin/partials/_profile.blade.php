@@ -24,7 +24,7 @@
                 <div class="card-body p-0">
                     <div class="header-user text-center mt-4">
                         <span class="avatar avatar-xxl brround mx-auto"><img src="assets/img/faces/5.jpg" alt="Profile-img" class="avatar avatar-xxl brround"></span>
-                        <div class=" text-center font-weight-semibold user mt-3 h6 mb-0">Jackocoins Admin</div>
+                        <div class=" text-center font-weight-semibold user mt-3 h6 mb-0">Bill System Admin</div>
                         <span class="text-muted">Sales Rep.</span>
                         <div class="card-body">
                             <div class="form-group ">
@@ -37,7 +37,7 @@
                             <div class="form-group mt-3">
                                 <label class="form-label text-left">Website</label>
                                 <select class="form-control nice-select " data-placeholder="Choose one">
-                                    <option value="1">jackocoins.com</option>
+                                    <option value="1">billsystem.com</option>
                                 </select>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                         <i class="dropdown-icon fe fe-edit mr-2"></i> Edit Profile
                     </a>
                     <a class="dropdown-item  border-top" href="#">
-                        <i class="dropdown-icon fe fe-user mr-2"></i> Jackocoins Crypto
+                        <i class="dropdown-icon fe fe-user mr-2"></i> Bill System
                     </a>
                     <a class="dropdown-item border-top" href="#">
                         <i class="dropdown-icon  fe fe-unlock mr-2"></i> Add Another Account

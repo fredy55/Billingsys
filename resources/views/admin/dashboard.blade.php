@@ -13,21 +13,12 @@
 				<div class="d-flex">
 					<i class="mdi mdi-home text-muted hover-cursor"></i>
 					<p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard&nbsp;/&nbsp;</p>
-					<p class="text-primary mb-0 hover-cursor">Crypto</p>
+					<p class="text-primary mb-0 hover-cursor">Billings</p>
 				</div>
 			</div>
-			<div class="d-flex align-items-end flex-wrap my-auto right-content breadcrumb-right">
-				<button type="button" class="btn btn-warning btn-icon mr-3 mt-2 mt-xl-0">
-					<i class="mdi mdi-download "></i>
-				</button>
-				<button type="button" class="btn btn-danger  btn-icon mr-3 mt-2 mt-xl-0">
-					<i class="mdi mdi-clock"></i>
-				</button>
-				<button type="button" class="btn btn-success btn-icon mr-3 mt-2 mt-xl-0">
-					<i class="mdi mdi-plus"></i>
-				</button>
+			{{-- <div class="d-flex align-items-end flex-wrap my-auto right-content breadcrumb-right">
 				<button class="btn btn-primary mt-2 mt-xl-0">Download report</button>
-			</div>
+			</div> --}}
 		</div>
 		<!-- /breadcrumb -->
 

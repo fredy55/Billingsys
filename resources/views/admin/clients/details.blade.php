@@ -35,7 +35,7 @@
                         <div class="main-contact-info-header pt-3">
                             <div class="media">
                                 <div class="main-img-user">
-                                    <img alt="avatar" src="{{ asset('img/faces/6.jpg') }}"> <a href="#"><i class="fe fe-camera"></i></a>
+                                    <img alt="avatar" src="{{ asset('img/cprofile.jpg') }}"> <a href="#"><i class="fe fe-camera"></i></a>
                                 </div>
                                 <div class="media-body">
                                     <h5>{{ $clients->ctname }}</h5>

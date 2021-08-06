@@ -58,7 +58,9 @@ header {
 }
 
 #client .to {
-  color: #777777;
+  color: #363636;
+  font-size: 1.3em;
+  font-weight: 550;
 }
 
 h2.name {
@@ -117,9 +119,9 @@ table td h3{
 }
 
 table .no {
-  color: #FFFFFF;
+  color: #333;
   font-size: 1.2em;
-  background: #7d77d6;
+  background: #DDDDDD;
 }
 
 table .desc {
@@ -127,7 +129,7 @@ table .desc {
 }
 
 table .unit {
-  background: #DDDDDD;
+  /* background: #DDDDDD; */
   text-align: left;
 }
 
@@ -136,8 +138,8 @@ table .qty {
 }
 
 table .total {
-  background: #7d77d6;
-  color: #FFFFFF;
+  background: #DDDDDD;
+  color: #333;
   text-align: left;
 }
 

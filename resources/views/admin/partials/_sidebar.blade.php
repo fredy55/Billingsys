@@ -14,7 +14,7 @@
             <li class="slide">
                 <div class="main-header-profile header-img">
                     <div class="main-img-user">
-                    <img alt="" src="{{ asset('img/faces/5.jpg')}}"></div>
+                    <img alt="" src="{{ asset('img/profile.jpg')}}"></div>
                     <h6>{{ Auth::user()->ftname }} {{ Auth::user()->ltname }}</h6>
                     {{-- <span>{{ findUserRole(Auth::user()->role_id)->role_name }}</span> --}}
                 </div>
@@ -26,9 +26,6 @@
                     <span class="side-menu__label">Dashboard</span>
                 </a>
             </li>
-
-            <!--================== FINANCIAL SECTION ==================-->
-             <li><hr /></li>
 
             <!-- Services -->
             <li class="slide">
@@ -84,20 +81,20 @@
                     <i class="angle fe fe-chevron-down"></i>
                 </a>
                 <ul class="slide-menu">
-                    <li>
+                    {{-- <li>
                         <a class="slide-item" href="{{ route('bills.list') }}">
                             Billing List
                             <span class="badge badge-warning side-badge">0</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
-                        <a class="slide-item" href="{{ route('admin.dashboard') }}">
+                        <a class="slide-item" href="{{ route('bills.list') }}">
                             Invoices
                             <span class="badge badge-warning side-badge">0</span>
                         </a>
                     </li>
                     <li>
-                        <a class="slide-item" href="{{ route('admin.dashboard') }}">
+                        <a class="slide-item" href="{{ route('bills.list') }}">
                             Receipts 
                             <span class="badge badge-warning side-badge">0</span>
                         </a>

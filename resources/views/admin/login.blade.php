@@ -11,8 +11,8 @@
 				<div class="my-auto authentication-pages">
 					<div>
 						<img src="{{ asset('img/brand/logo-white.png') }}" class=" m-0 mb-4" alt="logo">
-						<h5 class="mb-4">Responsive Modern Dashboard &amp; Admin Template</h5>
-						<p class="mb-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+						<h5 class="mb-4">Keeping records of client transactions...</h5>
+						{{-- <p class="mb-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p> --}}
 						<a href="index.html" class="btn btn-danger">Learn More</a>
 					</div>
 				</div>

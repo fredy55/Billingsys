@@ -15,7 +15,7 @@
             <div class="responsive-logo">
                 <a href="{{ route('admin.dashboard') }}">
                     <img src="{{ asset('img/brand/logo.png') }}" class="mobile-logo" alt="logo" />
-                    <img src="{{ asset('img/brand/logo-theme-dark.png') }}" class="dark-mobile-logo" alt="logo2">
+                    <img src="{{ asset('img/brand/logo-white.png') }}" class="mobile-logo" alt="logo2">
                 </a>
             </div>
         </div>
@@ -61,7 +61,7 @@
 
                                 <div class="wd-90p">
                                     <div class="d-flex">
-                                        <h5 class="mb-1 name">Jackocoins</h5>
+                                        <h5 class="mb-1 name">Bill System</h5>
                                         <p class="time mb-0 text-right ml-auto float-right">10 min ago</p>
                                     </div>
                                     <p class="mb-0 desc">We are currently upgrading the admin...</p>
@@ -92,7 +92,7 @@
                                     <i class="la la-shopping-basket text-success"></i>
                                 </div>
                                 <div class="ml-3">
-                                    <h5 class="notification-label mb-1">BTC Request</h5>
+                                    <h5 class="notification-label mb-1">Service Request</h5>
                                     <div class="notification-subtext">1 hour ago</div>
                                 </div>
                                 <div class="ml-auto" >
@@ -126,7 +126,7 @@
 
                 <!-- User profile -->
                 <div class="dropdown main-profile-menu nav nav-item nav-link">
-                    <a class="profile-user" href="#"><img alt="" src="{{ asset('img/faces/5.jpg')}}"></a>
+                    <a class="profile-user" href="#"><img alt="" src="{{ asset('img/profile.jpg')}}"></a>
                     <div class="dropdown-menu dropdown-menu-arrow animated fadeInUp">
                         <a class="dropdown-item" href="#"><i class="far fa-user"></i> My Profile</a>
                         <a class="dropdown-item" href="#"><i class="far fa-edit"></i> Edit Profile</a>

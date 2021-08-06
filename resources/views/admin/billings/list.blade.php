@@ -71,7 +71,7 @@
                                             <td>{{ $i+1 }}</td>
                                             <td>{{ $billinfo[$i]->bill_no }}</td>
                                              <td>
-                                                <a href="{{ route('clients.details', ['id'=>$billinfo[$i]->clients['id']]) }}">
+                                                <a href="{{ route('clients.details', ['id'=>$billinfo[$i]->client_id ]) }}">
                                                     {{ $billinfo[$i]->clients['ctname'] }}
                                                 </a>
                                             </td>

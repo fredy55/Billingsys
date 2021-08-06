@@ -123,7 +123,7 @@ class BillingController extends Controller
         return view('admin.billings.details',$data); 
     }
 
-    public function generateRecpt($id)
+    public function generateInvc($id)
     {
         $data['bllinfo'] = Billing::where(['IsActive' => 1, 'bill_no'=>$id])->get(['client_id', 'bill_no', 'total_amt', 'amt_paid','balance']);
 
@@ -138,6 +138,23 @@ class BillingController extends Controller
         //dd($data['bllinfo'][0]->total_amt);
         
         return view('admin.billings.invoice',$data); 
+    }
+    
+    public function generateRecpt($id)
+    {
+        $data['bllinfo'] = Billing::where(['IsActive' => 1, 'bill_no'=>$id])->get();
+
+        $data['billitems'] = Billingitem::select('billing_items.bill_no','service.sname','service.description','billing_items.price','billing_items.quantity','billing_items.total')
+                                          ->join('service', 'service.service_id', '=', 'billing_items.service_id')
+                                          ->where('billing_items.bill_no', $data['bllinfo'][0]->bill_no)
+                                          ->get();
+
+        $data['client'] = Clients::find($data['bllinfo'][0]->client_id);
+        $data['compinfo'] = Compinfo::find($data['client']['compId']);
+
+        //dd($data['bllinfo'][0]->total_amt);
+        
+        return view('admin.billings.receipt',$data); 
     }
 
     public function destroy($id)

@@ -24,6 +24,7 @@ Route::post('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout')
 
 
 //============================= DASHBOARD PAGES =============================//
+Route::get('/home', 'Admin\AdminController@index')->name('admin.dashboard');
 Route::get('/dashboard', 'Admin\AdminController@index')->name('admin.dashboard');
 
 
@@ -82,7 +83,8 @@ Route::group(['prefix' => 'billings'], function () {
     Route::post('/getBillOption', 'Admin\BillingController@getBillOptions')->name('bills.add.options');
     Route::post('/saveBill', 'Admin\BillingController@saveBill')->name('bills.add.save');
 
-    Route::get('/{id}/invoice', 'Admin\BillingController@generateRecpt')->name('bills.invoice.create');
+    Route::get('/{id}/invoice', 'Admin\BillingController@generateInvc')->name('bills.invoice.create');
+    Route::get('/{id}/receipt', 'Admin\BillingController@generateRecpt')->name('bills.receipt.create');
     Route::get('/{id}/delete', 'Admin\BillingController@destroy')->name('bills.invoice.delete');
     Route::post('/pay/update', 'Admin\BillingController@payUpdate')->name('bills.pay.update');
 }); 

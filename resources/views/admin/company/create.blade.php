@@ -38,7 +38,7 @@
                         
                         @include('inc.flashmsg')
 
-                         <form method="POST" action="{{ route('company.save') }}">
+                         <form method="POST" action="{{ route('company.save') }}" enctype="multipart/form-data">
                             @csrf
                             
                             <div class="row">
@@ -112,7 +112,7 @@
                                 <div class="col-md-8 col-lg-8 col-xs-12">
                                     <div class="form-group">
                                         <i class="fa fa-file"></i> Attach company logo 
-                                        <input type="file" name="logo" class="form-control" />
+                                        <input type="file" name="logo" class="form-control" required />
                                     </div>
                                 </div>
                             </div>

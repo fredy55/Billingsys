@@ -44,7 +44,7 @@
 
                                 <div class="wd-90p">
                                     <div class="d-flex">
-                                        <h5 class="mb-1 name">Jackocoins</h5>
+                                        <h5 class="mb-1 name">Bill System</h5>
                                         <p class="time mb-0 text-right ml-auto float-right">10 min ago</p>
                                     </div>
                                     <p class="mb-0 desc">We are currently upgrading the admin...</p>

@@ -133,10 +133,18 @@
                                     
                                         <tr>
                                             <th>
-                                                <a href="{{ route('bills.invoice.create', ['id'=>$bllinfo[0]->bill_no]) }}" type="button" class="btn btn-primary btn-md" target="_blank">
-                                                    <i class="fa fa-file"></i> Generate Invoice
-                                                </a>
+                                                @if ($bllinfo[0]->balance==0)
+                                                    <a href="{{ route('bills.receipt.create', ['id'=>$bllinfo[0]->bill_no]) }}" type="button" class="btn btn-primary btn-md" target="_blank">
+                                                        <i class="fa fa-file"></i> Generate Receipt
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('bills.invoice.create', ['id'=>$bllinfo[0]->bill_no]) }}" type="button" class="btn btn-primary btn-md" target="_blank">
+                                                        <i class="fa fa-file"></i> Generate Invoice
+                                                    </a>  
+                                                @endif
+                                                
                                             </th>
+
                                             <th>
                                                @if ($bllinfo[0]->balance>0)
                                                 <a href="#modaldemo8" data-effect="effect-flip-vertical" data-toggle="modal" type="button" class="btn btn-primary btn-md">

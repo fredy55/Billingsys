@@ -92,7 +92,7 @@
                                 <div class="col-md-4 col-lg-4 col-xs-12">
                                     <div class="form-group">
                                         <label>Service Description</label> 
-                                        <textarea id="servdesc" rows="3" name="servdesc" class="form-control @error('moduledesc') is-invalid @enderror" autocomplete="moduledesc">{{ $serv[0]->sname }}</textarea>
+                                        <textarea id="servdesc" rows="3" name="servdesc" class="form-control @error('moduledesc') is-invalid @enderror" autocomplete="moduledesc">{{ $serv[0]->description }}</textarea>
                                         
                                         @error('moduledesc')
                                             <span class="invalid-feedback" module="alert">

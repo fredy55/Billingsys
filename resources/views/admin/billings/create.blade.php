@@ -33,10 +33,14 @@
                                 <h1 class="invoice-title">Invoice</h1>
                                 <div class="billed-from">
                                         <p>
-                                        <h6>
-                                            <img src="{{ asset('img/brand/logo.png') }}" alt="Company Logo" width="80px"/>
+                                        <h4>
+                                            @if ($compinfo->img_url!=="nil")
+                                              <img alt="avatar" src="{{ asset($compinfo->img_url) }}" alt="Company Logo" width="45px"/>
+                                            @else
+                                                <img alt="avatar" src="{{ asset('img/brand/logo.png') }}" alt="Company Logo" width="45px"/>
+                                            @endif
                                             {{ $compinfo['ctname'] }}
-                                        </h6>
+                                        </h4>
                                         <address>{{ $compinfo['addressln1'] }}, {{ $compinfo['city'] }}, {{ $compinfo['state'] }}, {{ $compinfo['country'] }}</address>   
                                         <strong>Email:</strong> {{ $compinfo['email'] }}<br>
                                         <strong>Office Tel:</strong> {{ $compinfo['phone_no'] }}

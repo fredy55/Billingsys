@@ -67,24 +67,32 @@ class CompinfoController extends Controller
             'country'=>'string|required'
         ]);
         
+        //Upload image
+        $img_url = $this->getSingleImg($request, 'logo');
+
         //product does not exist
         $exist=Compinfo::where('email', $request->post('email'))->doesntExist();
 
         if($exist){
-            $company = new Compinfo;
-            $company->ctname = $request->post('ctname');
-            $company->cac_num = $request->post('cacnum');
-            $company->email = $request->post('email');
-            $company->phone_no = $request->post('phone');
-            $company->addressln1 = $request->post('address1');
-            $company->city = $request->post('city');
-            $company->state = $request->post('state');
-            $company->country = $request->post('country');
+            if($img_url!="nill"){
+                $company = new Compinfo;
+                $company->ctname = $request->post('ctname');
+                $company->cac_num = $request->post('cacnum');
+                $company->email = $request->post('email');
+                $company->phone_no = $request->post('phone');
+                $company->addressln1 = $request->post('address1');
+                $company->city = $request->post('city');
+                $company->state = $request->post('state');
+                $company->country = $request->post('country');
+                $company->img_url = $img_url;
 
-            if($company->save()){
-                return redirect()->route('company.list')->with(['success'=>'Company added successfully!']);
+                if($company->save()){
+                    return redirect()->route('company.list')->with(['success'=>'Company added successfully!']);
+                }else{
+                    return redirect()->route('company.add')->with(['danger'=>'Company NOT added!']);  
+                }
             }else{
-                return redirect()->route('company.add')->with(['danger'=>'Company NOT added!']);  
+                return redirect()->route('company.add')->with(['warning'=>'Upload company logo!']);  
             }
         }else{
             return redirect()->route('company.add')->with(['warning'=>'Company already exist!']);  
@@ -192,9 +200,18 @@ class CompinfoController extends Controller
     public function destroy($id)
     {
         ///product does exist
-        $exist=Compinfo::where('id',$id)->exists();
+        $imgQuery=Compinfo::where('id',$id);
 
-        if($exist){
+        //check previous image
+        $previmg = $imgQuery->get(['img_url']);
+
+        //dd($previmg[0]['img_url']);
+
+        if($previmg[0]['img_url']!=="nil"){
+             unlink($previmg[0]['img_url']);
+        }
+
+        if($imgQuery->exists()){
             $company = Compinfo::find($id);
 
             if($company->delete()){

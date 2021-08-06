@@ -45,12 +45,11 @@
                                 <thead>
                                     <tr>
                                         <th class="border-bottom-0">S/N</th>
-                                        <th class="border-bottom-0">Category</th>
                                         <th class="border-bottom-0">Service Name</th>
+                                        <th class="border-bottom-0">Category</th>
                                         <th class="border-bottom-0">Price</th>
                                         <th class="border-bottom-0">Date Created</th>
                                         <th class="border-bottom-0">Status</th>
-                                        <th class="border-bottom-0"></th>
                                         <th class="border-bottom-0"></th>
                                         <th class="border-bottom-0"></th>
                                     </tr>
@@ -60,14 +59,16 @@
                                        @for ($i=0; $i<count($services); ++$i) 
                                        <tr>
                                             <td>{{ $i+1 }}</td>
+                                            <td>
+                                                <a href="">
+                                                    {{ $services[$i]->sname }}
+                                                </a>
+                                            </td>
                                             <td>{{ $services[$i]->category }}</td>
-                                            <td>{{ $services[$i]->sname }}</td>
-                                            <td>{{ number_format($services[$i]->price, 2) }}</td>
+                                            <td>&#8358;{{ number_format($services[$i]->price, 2) }}</td>
                                             <td>{{ Carbon\Carbon::parse($services[$i]->created_at)->format('d-m-Y') }}</td>
                                             <td>{{ $services[$i]->IsActive==1?'Active':'Inactive' }}</td>
-                                            <td>
-                                                <a href=""><i class="fas fa-search"></i></a>
-                                            </td>
+                                            
                                             <td>
                                                 <a href="{{ route('service.edit',['id'=>$services[$i]->id]) }}"><i class="fas fa-edit"></i></a>
                                             </td>
