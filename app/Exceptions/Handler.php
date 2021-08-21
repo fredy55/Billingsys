@@ -48,8 +48,21 @@ class Handler extends ExceptionHandler
      *
      * @throws \Throwable
      */
-    public function render($request, Throwable $exception)
+    // public function render($request, Throwable $exception)
+    // {
+    //     return parent::render($request, $exception);
+    // }
+
+    public function render($request, Exception $exception)
     {
+        if ($exception instanceof ErrorException) {
+            error_reporting(0);
+
+            $kernel = app(\Illuminate\Contracts\Http\Kernel::class);
+            $response = $kernel->handle($request)->send();
+            return $kernel->terminate($request, $response);
+        }
+
         return parent::render($request, $exception);
     }
 }

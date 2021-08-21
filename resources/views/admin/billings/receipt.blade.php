@@ -23,7 +23,7 @@
   <main>
     <div id="details" class="clearfix">
       <div id="client">
-        <div class="to">Issued To:</div>
+        <div class="to">ISSUED TO:</div>
         <h2 class="name">{{ $client['ctname'] }}</h2>
         <div class="address">{{ $client['addressln1'] }}, {{ $client['city'] }}, {{ $client['state'].' State' }}, {{ $client['country'] }}</div>
         <div class="email"><a href="#">{{ $client['email'] }}</a></div>
