@@ -13,12 +13,7 @@ class CompinfoController extends Controller
    //Call the image upload trait
    use Imgupload;
    
-    //Admin authentication
-    // public function __construct(){
-    //     $this->middleware('auth:admin');
-    // }
-    
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

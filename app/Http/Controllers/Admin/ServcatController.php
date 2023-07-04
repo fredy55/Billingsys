@@ -8,11 +8,7 @@ use App\Models\Servcat;
 
 class ServcatController extends Controller
 {
-    //Admin authentication
-    // public function __construct(){
-    //     $this->middleware('auth:admin');
-    // }
-
+    
     /**
      * Display a listing of the resource.
      *

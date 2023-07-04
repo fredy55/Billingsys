@@ -10,12 +10,8 @@ use App\Models\Compinfo;
 
 class ClientsController extends Controller
 {
-    //Admin authentication
-    // public function __construct(){
-    //     $this->middleware('auth:admin');
-    // }
     
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

@@ -15,8 +15,7 @@
                 <div class="main-header-profile header-img">
                     <div class="main-img-user">
                     <img alt="" src="{{ asset('img/profile.jpg')}}"></div>
-                    {{-- <h6>{{ Auth::user()->ftname }} {{ Auth::user()->ltname }}</h6> --}}
-                    {{-- <span>{{ findUserRole(Auth::user()->role_id)->role_name }}</span> --}}
+                    <h6>{{ Auth::guard('admin')->user()->ftname }} {{ Auth::guard('admin')->user()->ltname }}</h6>
                 </div>
             </li>
 

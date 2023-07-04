@@ -26,6 +26,7 @@ class CreateSiteAdminTable extends Migration
             $table->string('img_url')->default('nil');
             $table->rememberToken();
             $table->integer('IsActive');
+            $table->string('last_login');
             $table->timestamps();
         });
     }

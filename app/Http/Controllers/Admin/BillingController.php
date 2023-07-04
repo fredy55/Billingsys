@@ -13,10 +13,6 @@ use App\Models\Services;
 class BillingController extends Controller
 {
     public $data = [];
-    //Admin authentication
-    // public function __construct(){
-    //     $this->middleware('auth:admin');
-    // }
     
     public function index()
     {
