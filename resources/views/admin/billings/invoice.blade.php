@@ -7,9 +7,9 @@
 <header class="clearfix">
     <div id="logo">
       @if ($compinfo->img_url!=="nil")
-        <img alt="avatar" src="{{ asset($compinfo->img_url) }}" alt="Company Logo" width="85px"/>
+        <img alt="avatar" src="{{ asset($compinfo->img_url) }}" alt="Company Logo" width="185px"/>
       @else
-          <img alt="avatar" src="{{ asset('img/brand/logo.png') }}" alt="Company Logo" width="85px"/>
+          <img alt="avatar" src="{{ asset('img/brand/logo.png') }}" alt="Company Logo" width="185px"/>
       @endif
     </div>
     <div id="company">

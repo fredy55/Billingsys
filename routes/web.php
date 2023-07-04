@@ -19,7 +19,6 @@ Route::middleware('guest:admin')->group(function(){
         Route::get('/', 'showLoginForm')->name('home');
         Route::get('/login', 'showLoginForm')->name('login');
         Route::post('/login', 'validateLogin')->name('home.login');
-        Route::post('/logout', 'logout')->name('admin.logout');
     });
 
 });
@@ -28,6 +27,11 @@ Route::middleware('guest:admin')->group(function(){
 //Authenticated Administrators
 Route::middleware('auth:admin')->group(function(){
     
+    Route::controller(LoginController::class)
+    ->group(function(){
+        Route::post('/logout', 'logout')->name('admin.logout');
+    });
+
     //============================= DASHBOARD PAGES =============================//
     Route::controller(AdminController::class)
     ->group(function(){

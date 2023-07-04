@@ -168,7 +168,7 @@ class CompinfoController extends Controller
         //dd($previmg[0]['img_url']);
 
         if($previmg[0]['img_url']!=="nil"){
-             unlink($previmg[0]['img_url']);
+             if(file_exists($previmg[0]['img_url'])) unlink($previmg[0]['img_url']);
         }
 
         if($imgQuery->exists()){

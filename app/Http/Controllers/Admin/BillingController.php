@@ -9,6 +9,7 @@ use App\Models\Billingitem;
 use App\Models\Clients;
 use App\Models\Compinfo;
 use App\Models\Services;
+use Milon\Barcode\DNS1D;
 
 class BillingController extends Controller
 {
@@ -132,6 +133,7 @@ class BillingController extends Controller
         $data['compinfo'] = Compinfo::find($data['client']['compId']);
 
         //dd($data['bllinfo'][0]->total_amt);
+
         
         return view('admin.billings.invoice',$data); 
     }
@@ -149,6 +151,7 @@ class BillingController extends Controller
         $data['compinfo'] = Compinfo::find($data['client']['compId']);
 
         //dd($data['bllinfo'][0]->total_amt);
+        $data['barcode'] = DNS1D::getBarcodePNG('817', 'C39');
         
         return view('admin.billings.receipt',$data); 
     }

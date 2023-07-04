@@ -7,9 +7,9 @@
 <header class="clearfix">
     <div id="logo">
       @if ($compinfo->img_url!=="nil")
-        <img alt="avatar" src="{{ asset($compinfo->img_url) }}" alt="Company Logo" width="85px"/>
+        <img alt="avatar" src="{{ asset($compinfo->img_url) }}" alt="Company Logo" width="185px"/>
       @else
-          <img alt="avatar" src="{{ asset('img/brand/logo.png') }}" alt="Company Logo" width="85px"/>
+          <img alt="avatar" src="{{ asset('img/brand/logo.png') }}" alt="Company Logo" width="185px"/>
       @endif
     </div>
     <div id="company">
@@ -29,7 +29,7 @@
         <div class="email"><a href="#">{{ $client['email'] }}</a></div>
       </div>
       <div id="invoice">
-        <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('817', 'C39')}}" alt="barcode" />
+        <img src="data:image/png;base64,{{ $barcode}}" alt="barcode" />
         <h1>RECEIPT {{ $bllinfo[0]->bill_no }}</h1>
         <div class="date"><strong>Receipt Date:</strong> {{ Carbon\Carbon::parse($bllinfo[0]->created_at)->format('d-m-Y') }}</div>
         {{-- <div class="date">Due Date: {{ Carbon\Carbon::parse($bllinfo[0]->bill_no)->format('d-m-Y') }}</div> --}}
