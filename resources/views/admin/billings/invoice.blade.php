@@ -31,7 +31,7 @@
       <div id="invoice">
         <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('817', 'C39')}}" alt="barcode" />
         <h1>INVOICE {{ $bllinfo[0]->bill_no }}</h1>
-        <div class="date"><strong>Date of Invoice:</strong> {{ Carbon\Carbon::parse($bllinfo[0]->bill_no)->format('d-m-Y') }}</div>
+        <div class="date"><strong>Date of Invoice:</strong> {{ Carbon\Carbon::parse($bllinfo[0]->created_at)->format('d-m-Y') }}</div>
         {{-- <div class="date">Due Date: {{ Carbon\Carbon::parse($bllinfo[0]->bill_no)->format('d-m-Y') }}</div> --}}
       </div>
     </div>
